@@ -5,12 +5,12 @@
 $ sudo yum install python-setuptools python-setuptools-devel
 ```
 
-2. Install **_superpvisor_**
+2. Install **_supervisor_**
 ```shell
 $ sudo easy_install supervisor
 ```
 
-3. Configure **_superpvisord_**
+3. Configure **_supervisord_**
 ```shell
 $ sudo vi /etc/supervisord.conf
 ```
@@ -28,23 +28,28 @@ stderr_logfile=/var/log/laraqueue.err.log
 stdout_logfile=/var/log/laraqueue.out.log
 ```
 
-4. Restart **_superpvisord_** to start queue workers
+4. Restart **_supervisord_** to start queue workers
 ```shell
 $ systemctl start supervisord
 $ supervisorctl reread ; supervisorctl update ; supervisorctl restart laravel-worker:*
 ```
 
-5. Start **_superpvisord_** when CentOS starts
+5. Start **_supervisord_** when CentOS starts
 ```shell
-systemctl enable supervisord
+$ systemctl enable supervisord
 ```
 
 6. If you want to read worker outputlogs, run this command
 ```shell
-tail -f /var/log/laraqueue.out.log
+$ tail -f /var/log/laraqueue.out.log
 ```
 
 7. If you want to read worker error logs, run this command
 ```shell
-tail -f /var/log/laraqueue.err.log
+$ tail -f /var/log/laraqueue.err.log
+```
+
+8. If you want to view the status of **_supervisord_** status
+```shell
+$ systemctl status supervisord
 ```
